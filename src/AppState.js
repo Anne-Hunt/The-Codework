@@ -9,5 +9,6 @@ export const AppState = reactive({
 
   posts: [],
   profiles: [],
+  paids: [],
   activeProfile: null
 })
