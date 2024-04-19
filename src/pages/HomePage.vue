@@ -1,12 +1,15 @@
 <script setup>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { paidService } from '../services/PaidService.js';
 import { postService } from '../services/PostService.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
+import { loadState, saveState } from '../utils/Store.js';
+import ProfileCard from '../components/ProfileCard.vue';
 
 const posts = computed(()=> AppState.posts)
+const theme = ref(loadState('theme') || 'light')
 
 async function getPosts(){
   try {
@@ -26,7 +29,19 @@ async function getPosts(){
     }
   }
 
+function themeSwitch(){
+  document.documentElement.setAttribute('data-bs-theme', theme.value)
+}
+
+function toggleTheme() {
+  theme.value = theme.value == 'light' ? 'dark' : 'light'
+  document.documentElement.setAttribute('data-bs-theme', theme.value)
+  saveState('theme', theme.value)
+}
+
+
   onMounted(()=>{
+    themeSwitch()
     getPaids()
     getPosts()
   })
@@ -34,9 +49,21 @@ async function getPosts(){
 </script>
 
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    {{ posts }}
-  </div>
+  <section class="row">
+    <div class="col-2">
+      <ProfileCard/>
+      <button class="btn text-light" @click="toggleTheme"
+            :title="`Enable ${theme == 'light' ? 'dark' : 'light'} theme.`">
+            <i class="mdi" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i>
+          </button>
+    </div>
+    <div class="col-8">
+
+    </div>
+    <div class="col-2">
+
+    </div>
+  </section>
 </template>
 
 <style scoped lang="scss">
