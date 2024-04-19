@@ -8,10 +8,14 @@ class ProfileService {
         throw new Error('Method not implemented.')
     }
     async getProfiles() {
-        const response = await api.get('api/profiles')
+        const response = await api.get('api/posts')
         logger.log('got profiles in service', response.data)
-        const profiles = response.data.map(profile => new Profile(profile.data))
-        AppState.profiles = profiles
+        const profileArray = []
+        for (let i = 0; i < response.data.posts.length; i++) {
+            profileArray.push(response.data.posts[i].creator)
+            // logger.log(profileArray)
+        }
+        AppState.profiles = profileArray
     }
 
 }

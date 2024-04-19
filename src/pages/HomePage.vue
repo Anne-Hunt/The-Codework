@@ -9,6 +9,7 @@ import { loadState, saveState } from '../utils/Store.js';
 import ProfileCard from '../components/ProfileCard.vue';
 import PostCard from '../components/PostCard.vue';
 import PaidCard from '../components/PaidCard.vue';
+import { profileService } from '../services/ProfileService.js';
 
 const posts = computed(()=> AppState.posts)
 const theme = ref(loadState('theme') || 'light')
@@ -22,6 +23,15 @@ async function getPosts(){
     Pop.toast('Unable to see posts at the moment', 'error')
   }
 }
+
+async function getProfiles(){
+    try {
+      await profileService.getProfiles()
+    } catch (error) {
+      logger.log('Unable to get profiles from service', error)
+      Pop.toast('Unable to get profiles, sorry!', 'error')
+    }
+  }
 
   async function getPaids(){
     try {
@@ -45,6 +55,7 @@ function toggleTheme() {
   onMounted(()=>{
     themeSwitch()
     getPosts()
+    getProfiles()
     getPaids()
   })
 
