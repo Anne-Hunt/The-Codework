@@ -1,4 +1,6 @@
 <script setup>
+import SearchBar from './components/SearchBar.vue';
+
 // import { AppState } from './AppState'
 // import Navbar from './components/Navbar.vue'
 
@@ -6,8 +8,8 @@
 </script>
 
 <template>
-  <header>
-
+  <header class="bg-primary p-2">
+    <SearchBar/>
   </header>
   <main>
     <router-view />

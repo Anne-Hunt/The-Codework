@@ -7,9 +7,12 @@ import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
 import { loadState, saveState } from '../utils/Store.js';
 import ProfileCard from '../components/ProfileCard.vue';
+import PostCard from '../components/PostCard.vue';
+import PaidCard from '../components/PaidCard.vue';
 
 const posts = computed(()=> AppState.posts)
 const theme = ref(loadState('theme') || 'light')
+const paids = computed(()=> AppState.paids)
 
 async function getPosts(){
   try {
@@ -41,15 +44,15 @@ function toggleTheme() {
 
   onMounted(()=>{
     themeSwitch()
-    getPaids()
     getPosts()
+    getPaids()
   })
 
 </script>
 
 <template>
   <section class="row">
-    <div class="col-2 flex-column font-dark justify-content-center p-2">
+    <div class="col-2 flex-column justify-content-center p-2">
       <ProfileCard/>
       <button class="btn text-light" @click="toggleTheme"
             :title="`Enable ${theme == 'light' ? 'dark' : 'light'} theme.`">
@@ -57,10 +60,16 @@ function toggleTheme() {
           </button>
     </div>
     <div class="col-8">
-      
+      <div class="row p-2" v-for="post in posts" :key="post.id">
+        <PostCard :post="post"/>
+      </div>
     </div>
     <div class="col-2">
-
+      <div class="hide">
+        <div v-for="paid in paids" :key="paid.title">
+        <PaidCard :paid="paid"/>
+      </div> 
+      </div>
     </div>
   </section>
 </template>
@@ -84,5 +93,9 @@ function toggleTheme() {
       object-position: center;
     }
   }
+}
+
+.hide{
+  display: none;
 }
 </style>
