@@ -1,12 +1,13 @@
 <script setup>
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 import { paidService } from '../services/PaidService.js';
 import { postService } from '../services/PostService.js';
 import { profileService } from '../services/ProfileService.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
+import { AppState } from '../AppState.js';
 
-
+const posts = computed(()=> AppState.posts)
 
 async function getPosts(){
   try {
@@ -16,15 +17,6 @@ async function getPosts(){
     Pop.toast('Unable to see posts at the moment', 'error')
   }
 }
-
-  async function getProfiles(){
-    try {
-      await profileService.getProfiles()
-    } catch (error) {
-      logger.log('Unable to get profiles from service', error)
-      Pop.toast('Unable to get profiles, sorry!', 'error')
-    }
-  }
 
   async function getPaids(){
     try {
@@ -38,20 +30,13 @@ async function getPosts(){
   onMounted(()=>{
     getPaids()
     getPosts()
-    getProfiles()
   })
 
 </script>
 
 <template>
   <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 card align-items-center shadow rounded elevation-3">
-      <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo"
-        class="rounded-circle">
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
-    </div>
+    {{ posts }}
   </div>
 </template>
 
