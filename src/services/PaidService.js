@@ -10,6 +10,11 @@ class PaidService {
         const paids = response.data.map(paid => new Paid(paid.data))
         AppState.paids = paids
     }
+
+    async postPaids(paid) {
+        const response = await api.post('api/ads', paid)
+        logger.log('sending paid to db', response.data)
+    }
 }
 
 export const paidService = new PaidService()

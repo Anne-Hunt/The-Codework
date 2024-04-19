@@ -39,7 +39,6 @@ function toggleTheme() {
   saveState('theme', theme.value)
 }
 
-
   onMounted(()=>{
     themeSwitch()
     getPaids()
@@ -50,7 +49,7 @@ function toggleTheme() {
 
 <template>
   <section class="row">
-    <div class="col-2">
+    <div class="col-2 flex-column font-dark justify-content-center p-2">
       <ProfileCard/>
       <button class="btn text-light" @click="toggleTheme"
             :title="`Enable ${theme == 'light' ? 'dark' : 'light'} theme.`">
@@ -58,7 +57,7 @@ function toggleTheme() {
           </button>
     </div>
     <div class="col-8">
-
+      
     </div>
     <div class="col-2">
 

@@ -4,6 +4,9 @@ import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 
 class ProfileService {
+    searchProfiles(value) {
+        throw new Error('Method not implemented.')
+    }
     async getProfiles() {
         const response = await api.get('api/profiles')
         logger.log('got profiles in service', response.data)

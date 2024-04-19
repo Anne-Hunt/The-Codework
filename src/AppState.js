@@ -14,5 +14,6 @@ export const AppState = reactive({
   currentPage: null,
   totalPages: null,
   older: null,
-  newer: null
+  newer: null,
+  searchTerms: null
 })

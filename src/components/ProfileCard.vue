@@ -4,7 +4,7 @@
 
 
 <template>
-<div>
+<div class="p-2">
     <Login />
 </div>
 </template>
