@@ -7,7 +7,16 @@ class ProfileService {
     searchProfiles(value) {
         throw new Error('Method not implemented.')
     }
+
+    findProfile(profileId) {
+        AppState.activeProfile = null
+        const id = AppState.profiles.find(profile => profile.id == profileId)
+        logger.log('found profile', id)
+        AppState.activeProfile = new Profile(id)
+    }
+
     async getProfiles() {
+        AppState.profiles = []
         const response = await api.get('api/posts')
         logger.log('got profiles in service', response.data)
         const profileArray = []

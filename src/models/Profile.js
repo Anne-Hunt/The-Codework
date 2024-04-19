@@ -12,6 +12,7 @@ export class Profile {
         this.resume = data.posts.creator.resume
         this.graduated = data.posts.creator.graduated
         this.class = data.posts.creator.class
+        this.id = data.posts.creator.id
     }
 }
 

@@ -1,8 +1,11 @@
 <script setup>
 import { Post } from '../models/Post.js';
+import { Profile } from '../models/Profile.js';
 
 
-defineProps ({post: Post})
+defineProps (
+    {post: Post, profile: Profile}
+)
 </script>
 
 
@@ -10,7 +13,9 @@ defineProps ({post: Post})
 <div>
     <div class="bg-light text-dark shadow post p-3">
         <div class="inline w-25">
-            <img :src="post.creator.picture" :alt="post.creator.picture" class="profilePic inline-block">
+            <RouterLink :to="{name: 'Profile', params: {profileId: post.creator.id}}" class="selectable">
+                <img :src="post.creator.picture" :alt="post.creator.picture" class="profilePic inline-block">
+            </RouterLink>
         </div>
         <div class="inline">
             <p class="inline name">{{ post.creator.name }}</p>

@@ -5,12 +5,16 @@ import { api } from "./AxiosService.js"
 
 
 class PostService {
+    getActiveProfilePosts(idSearch) {
+        throw new Error('Method not implemented.')
+    }
     clearingSearch() {
         throw new Error('Method not implemented.')
     }
     searchPosts(value) {
         throw new Error('Method not implemented.')
     }
+
     async getPosts() {
         const response = await api.get('api/posts')
         logger.log('grabbed posts in service', response.data)
