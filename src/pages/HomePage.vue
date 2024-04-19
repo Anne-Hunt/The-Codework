@@ -1,5 +1,28 @@
 <script setup>
+import { postService } from '../services/PostService.js';
+import { profileService } from '../services/ProfileService.js';
+import { logger } from '../utils/Logger.js';
+import Pop from '../utils/Pop.js';
 
+
+
+async function getPosts(){
+  try {
+    await postService.getPosts()
+  } catch (error) {
+    logger.log('unable to send getPost request to service', error)
+    Pop.toast('Unable to see posts at the moment', 'error')
+  }
+
+  async function getProfiles(){
+    try {
+      await profileService.getProfiles()
+    } catch (error) {
+      logger.log('Unable to get profiles from service', error)
+      Pop.toast('Unable to get profiles, sorry!', 'error')
+    }
+  }
+}
 </script>
 
 <template>
