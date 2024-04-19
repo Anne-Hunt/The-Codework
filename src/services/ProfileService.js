@@ -16,6 +16,7 @@ class ProfileService {
             // logger.log(profileArray)
         }
         AppState.profiles = profileArray
+        logger.log('finished', AppState.profiles)
     }
 
 }

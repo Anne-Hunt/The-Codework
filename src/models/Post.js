@@ -7,6 +7,14 @@ export class Post {
         this.creatorId = data.creatorId
         this.likeIds = data.likeIds
         this.creator = data.creator
+        this.createdAt = new Date(data.createdAt).toLocaleDateString
+        this.updatedAt = new Date(data.updatedAt).toLocaleDateString
+    }
+
+    get LikeCount() {
+        let count = (this.likeIds.length) / 1
+        let num = count += 1
+        return `${num}`
     }
 }
 

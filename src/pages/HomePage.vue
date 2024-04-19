@@ -14,6 +14,8 @@ import { profileService } from '../services/ProfileService.js';
 const posts = computed(()=> AppState.posts)
 const theme = ref(loadState('theme') || 'light')
 const paids = computed(()=> AppState.paids)
+const totalPages = computed(()=> AppState.totalPages)
+const currentPage = computed(()=> AppState.currentPage)
 
 async function getPosts(){
   try {
@@ -74,9 +76,16 @@ function toggleTheme() {
       <div class="row p-2" v-for="post in posts" :key="post.id">
         <PostCard :post="post"/>
       </div>
+      <div class="d-flex justify-content-center align-items-center">
+        <button v-if="currentPage>1" class="btn btn-primary">newer</button>
+        <button v-else class="btn btn-primary" disabled>newer</button>
+        <h5 class="p-4">Page {{ currentPage }}</h5>
+        <button v-if="currentPage < totalPages" class="btn btn-primary">older</button>
+        <button v-else class="btn btn-primary" disabled>older</button>
+      </div>
     </div>
     <div class="col-2">
-      <div class="hide">
+      <div>
         <div v-for="paid in paids" :key="paid.title">
         <PaidCard :paid="paid"/>
       </div> 

@@ -15,8 +15,11 @@ defineProps ({post: Post})
         <div class="inline">
             <p class="inline name">{{ post.creator.name }}</p>
         </div>
+        <span>{{ post.createdAt }}</span>
+        <span>{{ post.updatedAt }}</span>
         <div class="row overflow">
             <p>{{ post.body }}</p>
+            <p>{{ post.LikeCount }}</p><i class="mdi mdi-heart"></i>
         </div>
     </div>
     
@@ -31,7 +34,7 @@ defineProps ({post: Post})
 }
 
 .post{
-    height: 20dvh;
+    height: 40dvh;
 }
 
 .profilePic{

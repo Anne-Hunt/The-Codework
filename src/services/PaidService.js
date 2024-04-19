@@ -7,7 +7,7 @@ class PaidService {
     async getPaids() {
         const response = await api.get('api/ads')
         logger.log('get paids in service', response.data)
-        const paids = response.data.map(paid => new Paid(paid.data))
+        const paids = response.data.map(paid => new Paid(paid))
         AppState.paids = paids
     }
 
