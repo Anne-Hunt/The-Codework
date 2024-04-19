@@ -2,7 +2,6 @@
 import { computed, onMounted } from 'vue';
 import { paidService } from '../services/PaidService.js';
 import { postService } from '../services/PostService.js';
-import { profileService } from '../services/ProfileService.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
@@ -23,7 +22,7 @@ async function getPosts(){
       await paidService.getPaids()
     } catch (error) {
       logger.log('unable to get paids to service', error)
-      Pop.toast('Unable to load ads, sorry!', 'error')
+      Pop.toast('Unable to get ads, sorry!', 'error')
     }
   }
 
