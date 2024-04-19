@@ -1,4 +1,6 @@
 <script setup>
+import { onMounted } from 'vue';
+import { paidService } from '../services/PaidService.js';
 import { postService } from '../services/PostService.js';
 import { profileService } from '../services/ProfileService.js';
 import { logger } from '../utils/Logger.js';
@@ -13,6 +15,7 @@ async function getPosts(){
     logger.log('unable to send getPost request to service', error)
     Pop.toast('Unable to see posts at the moment', 'error')
   }
+}
 
   async function getProfiles(){
     try {
@@ -22,7 +25,22 @@ async function getPosts(){
       Pop.toast('Unable to get profiles, sorry!', 'error')
     }
   }
-}
+
+  async function getPaids(){
+    try {
+      await paidService.getPaids()
+    } catch (error) {
+      logger.log('unable to get paids to service', error)
+      Pop.toast('Unable to load ads, sorry!', 'error')
+    }
+  }
+
+  onMounted(()=>{
+    getPaids()
+    getPosts()
+    getProfiles()
+  })
+
 </script>
 
 <template>
