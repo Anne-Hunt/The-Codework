@@ -4,6 +4,7 @@ import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 
 class ProfileService {
+
     async searchProfiles(searchQuery) {
         AppState.profileResults = []
         const response = await api.get(`/api/profiles?query=${searchQuery}`)

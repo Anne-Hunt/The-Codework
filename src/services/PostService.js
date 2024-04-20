@@ -8,8 +8,8 @@ class PostService {
     async getActiveProfilePosts(idSearch) {
         const response = await api.get(`api/profiles/${idSearch}/posts`)
         logger.log('found user posts', response.data)
-        const posts = response.data.posts.map(post => new Post(post))
-        AppState.posts = posts
+        const posts = new Post(response)
+        AppState.activePost = posts
     }
 
     clearingSearch() {

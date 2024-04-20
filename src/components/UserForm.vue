@@ -1,11 +1,27 @@
 <script setup>
+import { computed } from 'vue';
+import { logger } from '../utils/Logger.js';
+import Pop from '../utils/Pop.js';
+import { accountService } from '../services/AccountService.js';
+import { AppState } from '../AppState.js';
 
+
+const profile = computed(()=> AppState.activeProfile)
+
+async function updateProfile(){
+    try {
+        await accountService.updateProfile()
+    } catch (error) {
+        logger.log('updating profile failed', error)
+        Pop.toast('Unable to update profile', 'error')
+    }
+}
 </script>
 
 
 <template>
 <div>
-    <form @submit.prevent>
+    <form @submit.prevent="updateProfile">
 <label class="form-label" for="updateEmail"></label>
 <input type="email" name="email" class="form-control" id="updateEmail" maxLength="500">
 
