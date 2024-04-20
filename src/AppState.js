@@ -12,9 +12,12 @@ export const AppState = reactive({
   paids: [],
   activeProfile: null,
   activeProfilePosts: [],
+  activePost: null,
   currentPage: null,
   totalPages: null,
   older: null,
   newer: null,
-  searchTerms: null
+  searchTerms: null,
+  profileResults: [],
+  postResults: []
 })

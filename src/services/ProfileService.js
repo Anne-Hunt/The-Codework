@@ -4,15 +4,20 @@ import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 
 class ProfileService {
-    searchProfiles(value) {
-        throw new Error('Method not implemented.')
+    async searchProfiles(searchQuery) {
+        AppState.profileResults = []
+        const response = await api.get(`/api/profiles?query=${searchQuery}`)
+        logger.log('finding profile ', response.data)
+        const profiles = response.data.map(profile => new Profile(profile))
+        AppState.profileResults = profiles
     }
 
     findProfile(profileId) {
         AppState.activeProfile = null
         const id = AppState.profiles.find(profile => profile.id == profileId)
         logger.log('found profile', id)
-        AppState.activeProfile = new Profile(id)
+        const profile = new Profile(id)
+        AppState.activeProfile = profile
     }
 
     async getProfiles() {
