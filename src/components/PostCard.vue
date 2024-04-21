@@ -1,12 +1,10 @@
 <script setup>
-import { Modal } from 'bootstrap';
 import { Account } from '../models/Account.js';
 import { Post } from '../models/Post.js';
 import { Profile } from '../models/Profile.js';
 import { postService } from '../services/PostService.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
-import { ref } from 'vue';
 
 
 defineProps (
@@ -34,23 +32,6 @@ async function likePost(postId){
     }
 }
 
-const postData = ref({
-    body: '',
-    imgUrl: '',
-    id:''
-})
-
-
-async function updatePost(){
-    try {
-        const postId = post.id
-        logger.log('making your post', postData)
-        await postService.updatePost(postId, postData.value) 
-    } catch (error) {
-        logger.log('unable to update post', error)
-        Pop.toast('Unable to update post right now', error)
-    }
-}
 </script>
 
 

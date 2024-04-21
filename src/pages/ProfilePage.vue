@@ -11,6 +11,8 @@
 import PostCard from '../components/PostCard.vue';
 import PostForm from '../components/PostForm.vue';
 import ProfileHeader from '../components/ProfileHeader.vue';
+import PostEditFormModal from '../components/PostEditFormModal.vue';
+import ProfileFormModal from '../components/ProfileFormModal.vue';
 
   const theme = ref(loadState('theme') || 'light')
   const activeProfile = computed(() => AppState.activeProfile)

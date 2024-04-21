@@ -1,6 +1,4 @@
 <script setup>
-// import { Modal } from 'bootstrap';
-
 
 </script>
 
@@ -17,7 +15,7 @@
       <div class="modal-body">
         <UserForm/>
       </div>
-      <div class="modal-footer">\
+      <div class="modal-footer">
         <p>Changes cannot be undone!</p>
       </div>
     </div>

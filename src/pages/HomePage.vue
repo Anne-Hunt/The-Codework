@@ -12,7 +12,7 @@ import PaidCard from '../components/PaidCard.vue';
 import PostForm from '../components/PostForm.vue';
 import ProfileResultCard from '../components/ProfileResultCard.vue';
 import PostEditFormModal from '../components/PostEditFormModal.vue';
-// import { profileService } from '../services/ProfileService.js';
+import ProfileFormModal from '../components/ProfileFormModal.vue';
 
 const posts = computed(()=> AppState.posts)
 const theme = ref(loadState('theme') || 'light')
@@ -80,47 +80,49 @@ function toggleTheme() {
 <template>
   <section class="row">
     <div class="col-2 text-center p-2">
-      <ProfileCard/>
+      <ProfileCard />
       <button class="btn text-light" @click="toggleTheme"
-            :title="`Enable ${theme == 'light' ? 'dark' : 'light'} theme.`">
-            <i class="mdi text-success fs-1" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i>
-          </button>
+        :title="`Enable ${theme == 'light' ? 'dark' : 'light'} theme.`">
+        <i class="mdi text-success fs-1" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i>
+      </button>
     </div>
     <div class="col-8">
       <div class="row p-3">
-        <PostForm/>
+        <PostForm />
       </div>
       <div v-if="AppState.postResults">
         <div class="row p-2" v-for="post in postResults" :key="post.id">
-          <PostCard :post="post"/>
+          <PostCard :post="post" />
         </div>
       </div>
       <div v-if="AppState.profileResults">
         <div class="row p-2" v-for="profile in profileResults" :key="profile.id">
-          <ProfileResultCard :profile="profile"/>
+          <ProfileResultCard :profile="profile" />
         </div>
       </div>
       <div class="row p-2" v-for="post in posts" :key="post.id">
-        <PostCard :post="post"/>
+        <PostCard :post="post" />
       </div>
       <div class="d-flex justify-content-center align-items-center">
-        <button v-if="AppState.currentPage>1" class="btn btn-primary" @click="getPostsByPage(AppState.currentPage-1)">newer</button>
+        <button v-if="AppState.currentPage>1" class="btn btn-primary"
+          @click="getPostsByPage(AppState.currentPage-1)">newer</button>
         <button v-else class="btn btn-primary" disabled>newer</button>
         <h5 class="p-4">Page {{ AppState.currentPage }}</h5>
-        <button v-if="AppState.currentPage < AppState.totalPages" class="btn btn-primary" @click="getPostsByPage(AppState.currentPage+1)">older</button>
+        <button v-if="AppState.currentPage < AppState.totalPages" class="btn btn-primary"
+          @click="getPostsByPage(AppState.currentPage+1)">older</button>
         <button v-else class="btn btn-primary" disabled>older</button>
       </div>
     </div>
     <div class="col-2">
       <div>
         <div v-for="paid in paids" :key="paid.title">
-        <PaidCard :paid="paid"/>
-      </div> 
+          <PaidCard :paid="paid" />
+        </div>
       </div>
     </div>
   </section>
-  <ProfileFormModal/>
-  <PostEditFormModal/>
+  <ProfileFormModal />
+  <PostEditFormModal />
 </template>
 
 <style scoped lang="scss">
