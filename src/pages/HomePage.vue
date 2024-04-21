@@ -69,9 +69,9 @@ function toggleTheme() {
 
   onMounted(()=>{
     themeSwitch()
+    getPaids()
     getPosts()
     // getProfiles()
-    getPaids()
   })
 
 </script>
@@ -118,6 +118,7 @@ function toggleTheme() {
       </div>
     </div>
   </section>
+  <ProfileFormModal/>
 </template>
 
 <style scoped lang="scss">

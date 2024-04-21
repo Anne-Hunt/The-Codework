@@ -22,6 +22,15 @@ async function trashPost(postId){
         Pop.toast('unable to delete this post', 'error')
     }
 }
+
+async function likePost(postId){
+    try {
+        await postService.likePost(postId)
+    } catch (error) {
+        logger.log('liking/unliking post', error)
+        Pop.toast('Unable to perform like action', 'error')
+    }
+}
 </script>
 
 
@@ -40,7 +49,7 @@ async function trashPost(postId){
         <div class="row overflow">
             <img :src="post.imgUrl" alt="Image!">
             <p>{{ post.body }}</p>
-            <p>{{ post.LikeCount }}</p><i class="mdi mdi-heart"></i>
+            <p>{{ post.LikeCount }}</p><i class="mdi mdi-heart" @click="likePost(post.id)"></i>
             <i v-if="post.creator.id == account?.id" class="mdi mdi-trash-can" @click="trashPost(post.id)"></i>
         </div>
     </div>
