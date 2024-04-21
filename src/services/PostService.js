@@ -15,9 +15,9 @@ class PostService {
         AppState.currentPage = response.data.page
     }
 
-    clearingSearch() {
-        throw new Error('Method not implemented.')
-    }
+    // clearingSearch() {
+    //     throw new Error('Method not implemented.')
+    // }
 
     async searchPosts(searchQuery) {
         AppState.posts = []
@@ -53,17 +53,17 @@ class PostService {
 
     }
 
+    async likePost(postId) {
+        const response = await api.post(`/api/posts/${postId}/like`)
+        logger.log('altering state of like on post', response.data)
+    }
+
     async trashPost(postId) {
         const response = await api.delete(`api/posts/${postId}`)
         logger.log('deleting post', response.data)
         const postIndex = AppState.posts.findIndex(post => post.id == postId)
         if (postIndex == -1) throw new Error('Finding index failed')
         AppState.posts.splice(postIndex, 1)
-    }
-
-    async likePost(postId) {
-        const response = await api.post(`/api/posts/${postId}/like`)
-        logger.log('altering state of like on post', response.data)
     }
 
     async findPostById(postId) {

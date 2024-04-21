@@ -28,6 +28,7 @@ import ProfileHeader from '../components/ProfileHeader.vue';
       Pop.toast('Unable to get profiles, sorry!', 'error')
     }
   }
+
   async function getActiveProfilePosts() {
     try {
       await postService.getActiveProfilePosts(route.params.profileId)
@@ -55,6 +56,7 @@ import ProfileHeader from '../components/ProfileHeader.vue';
     document.documentElement.setAttribute('data-bs-theme', theme.value)
     saveState('theme', theme.value)
   }
+
   onMounted(() => {
     findProfile()
     getActiveProfilePosts()
@@ -105,6 +107,8 @@ import ProfileHeader from '../components/ProfileHeader.vue';
   <div v-else class="col-8">
     <p class="text-emphasis">Search above to see content or access the homepage via the logo in the corner.</p>
   </div>
+  <ProfileFormModal/>
+  <PostEditFormModal/>
 </template>
 
 <style lang="scss" scoped>

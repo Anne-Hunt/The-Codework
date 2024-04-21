@@ -11,6 +11,7 @@ import PostCard from '../components/PostCard.vue';
 import PaidCard from '../components/PaidCard.vue';
 import PostForm from '../components/PostForm.vue';
 import ProfileResultCard from '../components/ProfileResultCard.vue';
+import PostEditFormModal from '../components/PostEditFormModal.vue';
 // import { profileService } from '../services/ProfileService.js';
 
 const posts = computed(()=> AppState.posts)
@@ -119,6 +120,7 @@ function toggleTheme() {
     </div>
   </section>
   <ProfileFormModal/>
+  <PostEditFormModal/>
 </template>
 
 <style scoped lang="scss">

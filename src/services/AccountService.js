@@ -16,9 +16,9 @@ class AccountService {
   async updateProfile(profileData) {
     const response = await api.put('account/', profileData)
     logger.log('updating profile', response.data)
-    const account = new Account(response.data)
+    const account = new Account(response)
     AppState.account = account
-
+    logger.log('end update', AppState.account)
   }
 }
 
