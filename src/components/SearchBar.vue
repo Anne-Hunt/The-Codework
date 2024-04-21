@@ -5,6 +5,7 @@ import { logger } from '../utils/Logger.js';
 import { postService } from '../services/PostService.js';
 import { profileService } from '../services/ProfileService.js';
 import Pop from '../utils/Pop.js';
+import { RouterLink } from 'vue-router';
 
 
 const searchQuery = ref('')
@@ -35,14 +36,24 @@ async function clearingSearch(){
 
 
 <template>
-<form @submit.prevent="search()">
-<div class="input-group">
-    <input v-model="searchQuery" type="text" class="form-control" placeholder="search posts and profiles" id="searchInput">
-    <button class="btn btn-success" type="submit"><small>FIND</small></button>
-</div>
-</form>
-<div v-if="searchTerms" class="mt-2"><div @click="clearingSearch" role="button" class="btn btn-success clicky" title="clear search results">{{ searchTerms }}</div>
-</div>
+    <section class="row">
+        <div class="col-1">
+            <RouterLink :to="'/'">
+                <i class="mdi mdi-cog-outline text-success fs-1 p-2"></i>
+            </RouterLink>
+        </div>
+            <div class="col-11 p-2">
+
+                <form @submit.prevent="search()">
+                <div class="input-group">
+                    <input v-model="searchQuery" type="text" class="form-control" placeholder="search posts and profiles" id="searchInput">
+                    <button class="btn btn-success" type="submit"><small>FIND</small></button>
+                </div>
+                </form>
+                <div v-if="searchTerms" class="mt-2"><div @click="clearingSearch" role="button" class="btn btn-success clicky" title="clear search results">{{ searchTerms }}</div>
+                </div>
+            </div>
+    </section>
 </template> 
 
 

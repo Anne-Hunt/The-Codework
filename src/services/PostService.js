@@ -25,8 +25,6 @@ class PostService {
         logger.log('search query in post service', response.data)
         const posts = response.data.posts.map(post => new Post(post))
         AppState.postResults = posts
-        AppState.newer = response.data.newer
-        AppState.older = response.data.older
         AppState.totalPages = response.data.totalPages
         AppState.currentPage = response.data.page
     }
@@ -36,8 +34,6 @@ class PostService {
         logger.log('grabbed posts in service', response.data)
         const posts = response.data.posts.map(post => new Post(post))
         AppState.posts = posts
-        AppState.newer = response.data.newer
-        AppState.older = response.data.older
         AppState.totalPages = response.data.totalPages
         AppState.currentPage = response.data.page
     }
@@ -82,8 +78,6 @@ class PostService {
         logger.log('getting posts by page', response.data)
         const posts = response.data.posts.map(post => new Post(post))
         AppState.posts = posts
-        AppState.newer = response.data.newer
-        AppState.older = response.data.older
         AppState.currentPage = pageNum
     }
 

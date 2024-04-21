@@ -9,7 +9,8 @@ import { loadState, saveState } from '../utils/Store.js';
 import ProfileCard from '../components/ProfileCard.vue';
 import PostCard from '../components/PostCard.vue';
 import PaidCard from '../components/PaidCard.vue';
-import { profileService } from '../services/ProfileService.js';
+import PostForm from '../components/PostForm.vue';
+// import { profileService } from '../services/ProfileService.js';
 
 const posts = computed(()=> AppState.posts)
 const theme = ref(loadState('theme') || 'light')
@@ -24,14 +25,14 @@ async function getPosts(){
   }
 }
 
-async function getProfiles(){
-    try {
-      await profileService.getProfiles()
-    } catch (error) {
-      logger.log('Unable to get profiles from service', error)
-      Pop.toast('Unable to get profiles, sorry!', 'error')
-    }
-  }
+// async function getProfiles(){
+//     try {
+//       await profileService.getProfiles()
+//     } catch (error) {
+//       logger.log('Unable to get profiles from service', error)
+//       Pop.toast('Unable to get profiles, sorry!', 'error')
+//     }
+//   }
 
   async function getPaids(){
     try {
@@ -65,7 +66,7 @@ function toggleTheme() {
   onMounted(()=>{
     themeSwitch()
     getPosts()
-    getProfiles()
+    // getProfiles()
     getPaids()
   })
 
@@ -81,6 +82,9 @@ function toggleTheme() {
           </button>
     </div>
     <div class="col-8">
+      <div class="row p-3">
+        <PostForm/>
+      </div>
       <div class="row p-2" v-for="post in posts" :key="post.id">
         <PostCard :post="post"/>
       </div>

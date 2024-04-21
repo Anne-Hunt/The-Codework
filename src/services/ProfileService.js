@@ -22,15 +22,17 @@ class ProfileService {
 
     async getProfiles() {
         AppState.profiles = []
-        const response = await api.get('api/posts')
+        const response = await api.get('api/profiles')
         logger.log('got profiles in service', response.data)
-        const profileArray = []
-        for (let i = 0; i < response.data.posts.length; i++) {
-            profileArray.push(response.data.posts[i].creator)
-            // logger.log(profileArray)
-        }
-        AppState.profiles = profileArray
-        logger.log('finished', AppState.profiles)
+        const profiles = response.data.map(profile => new Profile(profile))
+        AppState.profiles = profiles
+        // const profileArray = []
+        // for (let i = 0; i < response.data.posts.length; i++) {
+        //     profileArray.push(response.data.posts[i].creator)
+        //     // logger.log(profileArray)
+        // }
+        // AppState.profiles = profileArray
+        // logger.log('finished', AppState.profiles)
     }
 
 }

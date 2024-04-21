@@ -1,18 +1,18 @@
 
 export class Profile {
     constructor(data) {
-        this.subs = data.subs
-        this.email = data.email
-        this.name = data.name
-        this.picture = data.picture
-        this.bio = data.bio
-        this.coverImg = data.coverImg
-        this.github = data.github
-        this.linkedin = data.linkedin
-        this.resume = data.resume
-        this.graduated = data.graduated
-        this.class = data.class
-        this.id = data.id
+        this.subs = data.posts.creator.subs
+        this.email = data.posts.creator.email
+        this.name = data.posts.creator.name
+        this.picture = data.posts.creator.picture
+        this.bio = data.posts.creator.bio
+        this.coverImg = data.posts.creator.coverImg
+        this.github = data.posts.creator.github
+        this.linkedin = data.posts.creator.linkedin
+        this.resume = data.posts.creator.resume
+        this.graduated = data.posts.creator.graduated
+        this.class = data.posts.creator.class
+        this.id = data.posts.creator.id
     }
 }
 
