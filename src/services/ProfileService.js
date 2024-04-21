@@ -13,12 +13,11 @@ class ProfileService {
         AppState.profileResults = profiles
     }
 
-    findProfile(profileId) {
+    async findProfile(profileId) {
         AppState.activeProfile = null
-        const id = AppState.profiles.find(profile => profile.id == profileId)
-        logger.log('found profile', id)
-        const profile = new Profile(id)
-        AppState.activeProfile = profile
+        const response = await api.get(`api/profiles/${profileId}`)
+        logger.log('found profile', response.data)
+        AppState.activeProfile = new Profile(response.data)
     }
 
     async getProfiles() {

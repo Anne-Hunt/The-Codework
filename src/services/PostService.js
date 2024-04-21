@@ -5,11 +5,14 @@ import { api } from "./AxiosService.js"
 
 
 class PostService {
-    async getActiveProfilePosts(idSearch) {
-        const response = await api.get(`api/profiles/${idSearch}/posts`)
+    async getActiveProfilePosts(profileId) {
+        AppState.activeProfilePosts = []
+        const response = await api.get(`api/profiles/${profileId}/posts`)
         logger.log('found user posts', response.data)
-        const posts = new Post(response)
-        AppState.activePost = posts
+        const posts = response.data.posts.map(post => new Post(post))
+        AppState.activeProfilePosts = posts
+        AppState.totalPages = response.data.totalPages
+        AppState.currentPage = response.data.page
     }
 
     clearingSearch() {

@@ -17,8 +17,7 @@ const posts = computed(()=> AppState.activeProfilePosts)
 
 async function findProfile(){
     try {
-      const creatorId = route.params.id
-      await profileService.findProfile(creatorId)
+      await profileService.findProfile(route.params.profileId)
     } catch (error) {
       logger.log('Unable to get profiles from service', error)
       Pop.toast('Unable to get profiles, sorry!', 'error')
@@ -27,11 +26,20 @@ async function findProfile(){
 
   async function getActiveProfilePosts(){
     try {
-      const idSearch = route.params.id
-      await postService.getActiveProfilePosts(idSearch)
+      await postService.getActiveProfilePosts(route.params.profileId)
     } catch (error) {
       logger.log('unable to find user posts', error)
       Pop.toast('Unable to load posts for this profile', 'error')
+    }
+  }
+
+  async function getPostsByPage(pageNum){
+    try {
+      await postService.getPostsByPage(pageNum)
+      logger.log('appstate current page is ', AppState.currentPage)
+    } catch (error) {
+      logger.log('unable to get posts for page', error)
+      Pop.toast('Unable to get pages on requested page', error)
     }
   }
 
@@ -76,6 +84,13 @@ function toggleTheme() {
     <div v-else class="col-8">
       <p class="text-emphasis">Search above to see content or access the homepage via the logo in the corner.</p>
     </div>
+    <div class="d-flex justify-content-center align-items-center">
+        <button v-if="AppState.currentPage>1" class="btn btn-primary" @click="getPostsByPage(AppState.currentPage-1)">newer</button>
+        <button v-else class="btn btn-primary" disabled>newer</button>
+        <h5 class="p-4">Page {{ AppState.currentPage }}</h5>
+        <button v-if="AppState.currentPage < AppState.totalPages" class="btn btn-primary" @click="getPostsByPage(AppState.currentPage+1)">older</button>
+        <button v-else class="btn btn-primary" disabled>older</button>
+      </div>
     <div class="col-2">
 <PaidCard/>
     </div>
