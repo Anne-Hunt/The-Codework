@@ -57,6 +57,7 @@ class PostService {
         const response = await api.delete(`api/posts/${postId}`)
         logger.log('deleting post', response.data)
         const postIndex = AppState.posts.findIndex(post => post.id == postId)
+        if (postIndex == -1) throw new Error('Finding index failed')
         AppState.posts.splice(postIndex, 1)
     }
 

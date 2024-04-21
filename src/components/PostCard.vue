@@ -1,11 +1,27 @@
 <script setup>
+import { Account } from '../models/Account.js';
 import { Post } from '../models/Post.js';
 import { Profile } from '../models/Profile.js';
+import { postService } from '../services/PostService.js';
+import { logger } from '../utils/Logger.js';
+import Pop from '../utils/Pop.js';
 
 
 defineProps (
-    {post: Post, profile: Profile}
+    {post: Post, profile: Profile, account: Account}
 )
+
+async function trashPost(postId){
+    try {
+        const confirmTrash = await Pop.confirm('Do you really want to delete this post?')
+        if (!confirmTrash) return
+        logger.log('confirmed trash post', postId)
+        await postService.trashPost(postId)
+    } catch (error) {
+        logger.log('trashing failed', error, postId)
+        Pop.toast('unable to delete this post', 'error')
+    }
+}
 </script>
 
 
@@ -22,8 +38,10 @@ defineProps (
         </div>
         <span>{{ post.createdAt }}</span>
         <div class="row overflow">
+            <img :src="post.imgUrl" alt="Image!">
             <p>{{ post.body }}</p>
             <p>{{ post.LikeCount }}</p><i class="mdi mdi-heart"></i>
+            <i v-if="post.creator.id == account?.id" class="mdi mdi-trash-can" @click="trashPost(post.id)"></i>
         </div>
     </div>
     

@@ -17,6 +17,7 @@ import ProfileHeader from '../components/ProfileHeader.vue';
   const route = useRoute()
   const posts = computed(() => AppState.activeProfilePosts)
   const paids = computed(() => AppState.paids)
+  const account = computed(()=>AppState.account)
 
   
   async function findProfile() {

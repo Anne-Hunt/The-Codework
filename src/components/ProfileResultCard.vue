@@ -1,10 +1,6 @@
 <script setup>
-// import { computed } from 'vue';
-// import { Post } from '../models/Post.js';
 import { Profile } from '../models/Profile.js';
-// import { AppState } from '../AppState.js';
 
-// const profile = computed(()=> AppState.profileResults)
 defineProps (
     {profile: Profile}
 )

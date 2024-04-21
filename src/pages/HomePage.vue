@@ -18,6 +18,7 @@ const theme = ref(loadState('theme') || 'light')
 const paids = computed(()=> AppState.paids)
 const profileResults = computed(()=> AppState.profileResults)
 const postResults = computed(()=> AppState.postResults)
+const account = computed(()=>AppState.account)
 
 async function getPosts(){
   try {
@@ -88,12 +89,14 @@ function toggleTheme() {
       <div class="row p-3">
         <PostForm/>
       </div>
-      <div v-if="AppState.postResults || AppState.profileResults">
+      <div v-if="AppState.postResults">
         <div class="row p-2" v-for="post in postResults" :key="post.id">
           <PostCard :post="post"/>
         </div>
+      </div>
+      <div v-if="AppState.profileResults">
         <div class="row p-2" v-for="profile in profileResults" :key="profile.id">
-          <ProfileResultsCard :profile="profile"/>
+          <ProfileResultCard :profile="profile"/>
         </div>
       </div>
       <div class="row p-2" v-for="post in posts" :key="post.id">
