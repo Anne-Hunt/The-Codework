@@ -75,14 +75,13 @@ class PostService {
     }
 
     async getPostsByPage(pageNum) {
-        const response = await api.get(`api/posts?${pageNum}`)
+        const response = await api.get(`api/posts?page=${pageNum}`)
         logger.log('getting posts by page', response.data)
         const posts = response.data.posts.map(post => new Post(post))
         AppState.posts = posts
         AppState.newer = response.data.newer
         AppState.older = response.data.older
-        AppState.totalPages = response.data.totalPages
-        AppState.currentPage = response.data.page
+        AppState.currentPage = pageNum
     }
 
 }

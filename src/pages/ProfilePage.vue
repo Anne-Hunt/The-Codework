@@ -62,17 +62,19 @@ function toggleTheme() {
             <i class="mdi" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i>
           </button>
     </div>
-    <div class="col-8">
+    <div v-if="AppState.activeProfile != null" class="col-8">
       <img :src="activeProfile.coverImg" :alt="activeProfile.name">
       <div>
         <img :src="activeProfile.picture" :alt="activeProfile.name">
       </div>
       <h2>{{ activeProfile.name }}</h2>
-
+  
       <div v-for="post in posts" :key="post.id">
         <PostCard :post="post"/>
       </div>
-
+    </div>
+    <div v-else class="col-8">
+      <p class="text-emphasis">Search above to see content or access the homepage via the logo in the corner.</p>
     </div>
     <div class="col-2">
 <PaidCard/>

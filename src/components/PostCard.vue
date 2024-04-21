@@ -21,7 +21,6 @@ defineProps (
             <p class="inline name">{{ post.creator.name }}</p>
         </div>
         <span>{{ post.createdAt }}</span>
-        <span>{{ post.updatedAt }}</span>
         <div class="row overflow">
             <p>{{ post.body }}</p>
             <p>{{ post.LikeCount }}</p><i class="mdi mdi-heart"></i>

@@ -1,17 +1,24 @@
 <script setup>
-import { computed } from 'vue'
-import { AppState } from '../AppState'
-import { AuthService } from '../services/AuthService'
+  import {
+    computed
+  } from 'vue'
+  import {
+    AppState
+  } from '../AppState'
+  import {
+    AuthService
+  } from '../services/AuthService'
 
-const user = computed(() => AppState.user)
-const account = computed(() => AppState.account)
-async function login() {
-  AuthService.loginWithPopup()
-}
-async function logout() {
-  AuthService.logout({ returnTo: window.location.origin })
-}
-
+  const user = computed(() => AppState.user)
+  const account = computed(() => AppState.account)
+  async function login() {
+    AuthService.loginWithPopup()
+  }
+  async function logout() {
+    AuthService.logout({
+      returnTo: window.location.origin
+    })
+  }
 </script>
 
 <template>
@@ -22,14 +29,17 @@ async function logout() {
     </button>
     <div v-else>
       <div class="dropdown my-2 my-lg-0">
-        <div type="button" class="bg-dark border-0 selectable no-select" data-bs-toggle="dropdown"
+        <div type="button" class="border-0 selectable no-select" data-bs-toggle="dropdown"
           aria-expanded="false">
-          <div v-if="account?.picture || user?.picture">
-            <img :src="account?.picture || user?.picture" alt="account photo" height="40" class="rounded" />
+          <div v-if="account?.picture || user?.picture" class="d-flex justify-content-center">
+            <img :src="account?.picture || user?.picture" alt="account photo" height="70" class="rounded-pill shadow" />
           </div>
         </div>
         <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" aria-labelledby="authDropdown">
           <div class="list-group">
+            <div class="list-group-item dropdown-item list-group-item-action text-danger selectable" data-bs-toggle="modal" data-bs-target="#profileFormModal">
+                Edit Profile
+            </div>
             <router-link :to="{ name: 'Account' }">
               <div class="list-group-item dropdown-item list-group-item-action">
                 Manage Account
@@ -37,7 +47,7 @@ async function logout() {
             </router-link>
             <div class="list-group-item dropdown-item list-group-item-action text-danger selectable" @click="logout">
               <i class="mdi mdi-logout"></i>
-              logout
+              Logout
             </div>
           </div>
         </div>

@@ -1,0 +1,32 @@
+<script setup>
+// import { Modal } from 'bootstrap';
+
+
+</script>
+
+
+<template>
+<div>
+    <div class="modal fade" id="profileFormModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="profileFormModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Update Profile</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <UserForm/>
+      </div>
+      <div class="modal-footer">\
+        <p>Changes cannot be undone!</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</template>
+
+
+<style lang="scss" scoped>
+
+</style>

@@ -14,8 +14,6 @@ import { profileService } from '../services/ProfileService.js';
 const posts = computed(()=> AppState.posts)
 const theme = ref(loadState('theme') || 'light')
 const paids = computed(()=> AppState.paids)
-const totalPages = computed(()=> AppState.totalPages)
-const currentPage = computed(()=> AppState.currentPage)
 
 async function getPosts(){
   try {
@@ -44,6 +42,16 @@ async function getProfiles(){
     }
   }
 
+  async function getPostsByPage(pageNum){
+    try {
+      await postService.getPostsByPage(pageNum)
+      logger.log('appstate current page is ', AppState.currentPage)
+    } catch (error) {
+      logger.log('unable to get posts for page', error)
+      Pop.toast('Unable to get pages on requested page', error)
+    }
+  }
+
 function themeSwitch(){
   document.documentElement.setAttribute('data-bs-theme', theme.value)
 }
@@ -65,11 +73,11 @@ function toggleTheme() {
 
 <template>
   <section class="row">
-    <div class="col-2 flex-column justify-content-center p-2">
+    <div class="col-2 text-center p-2">
       <ProfileCard/>
       <button class="btn text-light" @click="toggleTheme"
             :title="`Enable ${theme == 'light' ? 'dark' : 'light'} theme.`">
-            <i class="mdi" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i>
+            <i class="mdi text-success fs-1" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i>
           </button>
     </div>
     <div class="col-8">
@@ -77,10 +85,10 @@ function toggleTheme() {
         <PostCard :post="post"/>
       </div>
       <div class="d-flex justify-content-center align-items-center">
-        <button v-if="currentPage>1" class="btn btn-primary">newer</button>
+        <button v-if="AppState.currentPage>1" class="btn btn-primary" @click="getPostsByPage(AppState.currentPage-1)">newer</button>
         <button v-else class="btn btn-primary" disabled>newer</button>
-        <h5 class="p-4">Page {{ currentPage }}</h5>
-        <button v-if="currentPage < totalPages" class="btn btn-primary">older</button>
+        <h5 class="p-4">Page {{ AppState.currentPage }}</h5>
+        <button v-if="AppState.currentPage < AppState.totalPages" class="btn btn-primary" @click="getPostsByPage(AppState.currentPage+1)">older</button>
         <button v-else class="btn btn-primary" disabled>older</button>
       </div>
     </div>

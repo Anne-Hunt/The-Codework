@@ -7,14 +7,22 @@ export class Post {
         this.creatorId = data.creatorId
         this.likeIds = data.likeIds
         this.creator = data.creator
-        this.createdAt = new Date(data.createdAt).toLocaleDateString
-        this.updatedAt = new Date(data.updatedAt).toLocaleDateString
+        this.createdAt = new Date(data.createdAt)
+        this.updatedAt = new Date(data.updatedAt)
     }
 
     get LikeCount() {
         let count = (this.likeIds.length) / 1
         let num = count += 1
         return `${num}`
+    }
+
+    get Date() {
+        const chosenDate = this.createdAt != this.updatedAt ? this.updatedAt : this.createdAt
+        const oldDate = new Date(chosenDate)
+        const currentTime = new Date()
+        const timeElapsed = currentTime - oldDate
+        return `${chosenDate}`
     }
 }
 
