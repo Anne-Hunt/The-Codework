@@ -4,6 +4,13 @@ import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 
 class ProfileService {
+    async findUserProfile() {
+        const userId = AppState.account.id
+        const response = await api.get(`api/profile/${userId}`)
+        logger.log('getting user associated', response.data)
+        const profile = new Profile(response)
+        AppState.loggedInProfile = profile
+    }
 
     async searchProfiles(searchQuery) {
         AppState.profileResults = []

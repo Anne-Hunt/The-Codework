@@ -10,51 +10,13 @@ import ProfileCard from '../components/ProfileCard.vue';
 import PostCard from '../components/PostCard.vue';
 import PaidCard from '../components/PaidCard.vue';
 import PostForm from '../components/PostForm.vue';
-import ProfileResultCard from '../components/ProfileResultCard.vue';
 // import { profileService } from '../services/ProfileService.js';
 
-const posts = computed(()=> AppState.posts)
+const posts = computed(()=> AppState.postResults)
 const theme = ref(loadState('theme') || 'light')
 const paids = computed(()=> AppState.paids)
-const profileResults = computed(()=> AppState.profileResults)
-const postResults = computed(()=> AppState.postResults)
+const profiles = computed(()=> AppState.profileResults)
 
-async function getPosts(){
-  try {
-    await postService.getPosts()
-  } catch (error) {
-    logger.log('unable to send getPost request to service', error)
-    Pop.toast('Unable to see posts at the moment', 'error')
-  }
-}
-
-// async function getProfiles(){
-//     try {
-//       await profileService.getProfiles()
-//     } catch (error) {
-//       logger.log('Unable to get profiles from service', error)
-//       Pop.toast('Unable to get profiles, sorry!', 'error')
-//     }
-//   }
-
-  async function getPaids(){
-    try {
-      await paidService.getPaids()
-    } catch (error) {
-      logger.log('unable to get paids to service', error)
-      Pop.toast('Unable to get ads, sorry!', 'error')
-    }
-  }
-
-  async function getPostsByPage(pageNum){
-    try {
-      await postService.getPostsByPage(pageNum)
-      logger.log('appstate current page is ', AppState.currentPage)
-    } catch (error) {
-      logger.log('unable to get posts for page', error)
-      Pop.toast('Unable to get pages on requested page', error)
-    }
-  }
 
 function themeSwitch(){
   document.documentElement.setAttribute('data-bs-theme', theme.value)
@@ -68,9 +30,6 @@ function toggleTheme() {
 
   onMounted(()=>{
     themeSwitch()
-    getPosts()
-    // getProfiles()
-    getPaids()
   })
 
 </script>
@@ -88,24 +47,19 @@ function toggleTheme() {
       <div class="row p-3">
         <PostForm/>
       </div>
-      <div v-if="AppState.postResults || AppState.profileResults">
-        <div class="row p-2" v-for="post in postResults" :key="post.id">
-          <PostCard :post="post"/>
-        </div>
-        <div class="row p-2" v-for="profile in profileResults" :key="profile.id">
-          <ProfileResultsCard :profile="profile"/>
-        </div>
-      </div>
       <div class="row p-2" v-for="post in posts" :key="post.id">
         <PostCard :post="post"/>
       </div>
-      <div class="d-flex justify-content-center align-items-center">
+      <div class="row p-2" v-for="profile in profiles" :key="profile.id">
+        <ProfileCard :profile="profile"/>
+      </div>
+      <!-- <div class="d-flex justify-content-center align-items-center">
         <button v-if="AppState.currentPage>1" class="btn btn-primary" @click="getPostsByPage(AppState.currentPage-1)">newer</button>
         <button v-else class="btn btn-primary" disabled>newer</button>
         <h5 class="p-4">Page {{ AppState.currentPage }}</h5>
         <button v-if="AppState.currentPage < AppState.totalPages" class="btn btn-primary" @click="getPostsByPage(AppState.currentPage+1)">older</button>
         <button v-else class="btn btn-primary" disabled>older</button>
-      </div>
+      </div> -->
     </div>
     <div class="col-2">
       <div>

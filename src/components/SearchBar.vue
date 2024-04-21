@@ -43,7 +43,6 @@ async function clearingSearch(){
             </RouterLink>
         </div>
             <div class="col-11 p-2">
-
                 <form @submit.prevent="search()">
                 <div class="input-group">
                     <input v-model="searchQuery" type="text" class="form-control" placeholder="search posts and profiles" id="searchInput">

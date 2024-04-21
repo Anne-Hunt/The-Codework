@@ -74,7 +74,6 @@ import ProfileHeader from '../components/ProfileHeader.vue';
       </div>
       <div class="col-8">
         <ProfileHeader/>
-        <p class="text-success">Header here</p>
         <div v-if="AppState.account" class="row p-2">
           <PostForm/>
         </div>
