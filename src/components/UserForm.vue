@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { accountService } from '../services/AccountService.js';
@@ -20,10 +20,6 @@ const updateData  = ref({
     graduated: Boolean,
 })
 
-// onMounted(()=>
-//     {updateData.value = {...AppState.loggedInProfile}})
-// const account = computed(()=> AppState.account)
-
 async function updateProfile(updateData){
     try {
         await accountService.updateProfile(updateData)
@@ -35,9 +31,6 @@ async function updateProfile(updateData){
     }
 }
 
-// function resetFormType(){
-//     profileService.resetFormType()
-// }
 </script>
 
 

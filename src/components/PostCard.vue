@@ -1,6 +1,5 @@
 <script setup>
 import { computed } from 'vue';
-import { Account } from '../models/Account.js';
 import { Post } from '../models/Post.js';
 import { Profile } from '../models/Profile.js';
 import { postService } from '../services/PostService.js';
@@ -45,10 +44,6 @@ async function openModal(postId){
         logger.log('bad post modal', error)
     }
 }
-
-// function resetFormType(){
-//     profileService.resetFormType()
-// }
 
 </script>
 

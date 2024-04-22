@@ -12,7 +12,7 @@ export class Profile {
         this.resume = data.resume
         this.graduated = data.graduated
         this.class = data.class
-        this.id = data._id
+        this.id = data._id || data.id
     }
 }
 

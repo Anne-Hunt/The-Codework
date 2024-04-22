@@ -1,46 +1,6 @@
 <script setup>
-import { computed, onMounted } from 'vue';
-import { Post } from '../models/Post.js';
-import { Profile } from '../models/Profile.js';
 import PostEditForm from './PostEditForm.vue';
-import UserForm from './UserForm.vue';
-import { AppState } from '../AppState.js';
-import { profileService } from '../services/ProfileService.js';
 
-// const formModal = document.getElementById('formModal')
-const formType = computed(()=> AppState.formType)
-
-function resetFormType(){
-    profileService.resetFormType()
-}
-
-defineProps({
-  post: Post, profile: Profile
-})
-
-// function getForm(formType){
-//   if (formType == `${}`)
-//   formType 
-//   if (formModal) {
-
-//     formModal.addEventListener('show.bs.modal', event => {
-//       // Button that triggered the modal
-//       const button = event.relatedTarget
-//       // Extract info from data-bs-* attributes
-//       const form = button.getAttribute('data-bs-whatever')
-//       // If necessary, you could initiate an Ajax request here
-//       // and then do the updating in a callback.
-  
-//       // Update the modal's content.
-//       const modalBodyInput = formModal.querySelector('.modal-body')
-  
-//       modalTitle.textContent = `New message to ${recipient}`
-//       modalBodyInput.value = form
-//     })
-//   }
-// }
-
-// onMounted(()=>{getForm()})
 </script>
 
 <template>

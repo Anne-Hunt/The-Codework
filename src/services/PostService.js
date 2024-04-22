@@ -28,10 +28,6 @@ class PostService {
         AppState.currentPage = response.data.page
     }
 
-    // clearingSearch() {
-    //     throw new Error('Method not implemented.')
-    // }
-
     async searchPosts(searchQuery) {
         AppState.posts = []
         const response = await api.get(`api/posts?query=${searchQuery}`)

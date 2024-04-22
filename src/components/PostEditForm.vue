@@ -1,10 +1,9 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import { Post } from '../models/Post.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { postService } from '../services/PostService.js';
-import { AppState } from '../AppState.js';
 import { Modal } from 'bootstrap';
 
 defineProps({post: Post}) 
@@ -17,7 +16,7 @@ const postData = ref({
 async function updatePost(postId){
     try {
         logger.log('making your post', postData, postId)
-        await postService.updatePost(postId, postData.value)
+        await postService.updatePost(postData.value)
         Modal.getOrCreateInstance('#formModal').hide()
     } catch (error) {
         logger.log('unable to update post', error)

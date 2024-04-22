@@ -4,14 +4,6 @@ import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 
 class ProfileService {
-    resetFormType() {
-        AppState.formType = ''
-    }
-
-    setFormModal(type) {
-        AppState.formType = ``
-        AppState.formType = type
-    }
 
     async findUserProfile() {
         const userId = AppState.account.id
@@ -39,21 +31,6 @@ class ProfileService {
     async updateProfile(profileId, updateData) {
         const response = await api.put(`api/profiles/${profileId}`, updateData)
         logger.log('sending to profile server', updateData, profileId, response.data)
-    }
-
-    async getProfiles() {
-        AppState.profiles = []
-        const response = await api.get('api/profiles')
-        logger.log('got profiles in service', response.data)
-        const profiles = response.data.map(profile => new Profile(profile))
-        AppState.profiles = profiles
-        // const profileArray = []
-        // for (let i = 0; i < response.data.posts.length; i++) {
-        //     profileArray.push(response.data.posts[i].creator)
-        //     // logger.log(profileArray)
-        // }
-        // AppState.profiles = profileArray
-        // logger.log('finished', AppState.profiles)
     }
 
 }

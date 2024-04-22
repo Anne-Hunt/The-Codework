@@ -18,13 +18,13 @@ export class Post {
         return `${num}`
     }
 
-    get Date() {
-        const chosenDate = this.createdAt != this.updatedAt ? this.updatedAt : this.createdAt
-        const oldDate = new Date(chosenDate)
-        const currentTime = new Date()
-        const timeElapsed = currentTime - oldDate
-        return `${chosenDate}`
-    }
+    // get Date() {
+    //     const chosenDate = this.createdAt != this.updatedAt ? this.updatedAt : this.createdAt
+    //     const oldDate = new Date(chosenDate)
+    //     const currentTime = new Date()
+    //     const timeElapsed = currentTime - oldDate
+    //     return `${chosenDate}`
+    // }
 }
 
 // {"body":{"type":"String","required":true,"maxLength":5000},"imgUrl":{"type":"String","maxLength":500},"creatorId":{"type":"SchemaObjectId","required":true,"ref":"Account"},"likeIds":[{"type":"SchemaObjectId","ref":"Account"}]}
