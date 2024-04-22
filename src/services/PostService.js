@@ -58,10 +58,11 @@ class PostService {
         AppState.posts.push(post)
     }
 
-    async updatePost(postData, postId) {
+    async updatePost(postData) {
+        const postId = AppState.activePost.id
         const response = await api.put(`api/posts/${postId}`, postData)
         logger.log('updating data in service for post', response.data)
-        this.getPosts()
+
     }
 
     async likePost(postId) {

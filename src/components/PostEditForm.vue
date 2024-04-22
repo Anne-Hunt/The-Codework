@@ -9,8 +9,6 @@ import { Modal } from 'bootstrap';
 
 defineProps({post: Post}) 
 
-const activePost = computed(()=> AppState.activePost)
-
 const postData = ref({
     body: '',
     imgUrl: '',
@@ -31,7 +29,7 @@ async function updatePost(postId){
 
 <template>
     <div>
-        <form @submit.prevent="updatePost(activePost.id)">
+        <form @submit.prevent="updatePost()">
             <label class="form-label" for="postBody">Update Your Post</label>
             <input v-model="postData.body" type="text-area" name="body" class="form-control text-secondary"
                 id="postBody" maxlength="5000" required>
