@@ -24,6 +24,10 @@ import { profileService } from '../services/ProfileService.js';
   function setFormModal(formType){
     profileService.setFormModal(formType)
   }
+
+//   function resetFormType(){
+//     profileService.resetFormType()
+// }
 </script>
 
 <template>
@@ -42,7 +46,7 @@ import { profileService } from '../services/ProfileService.js';
         </div>
         <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" aria-labelledby="authDropdown">
           <div class="list-group">
-            <div class="list-group-item dropdown-item list-group-item-action selectable" data-bs-toggle="modal" data-bs-target="#formModal" @click="setFormModal(`<UserForm/>`)">
+            <div class="list-group-item dropdown-item list-group-item-action selectable" data-bs-toggle="modal" data-bs-target="#formModal" @click="setFormModal('user')">
                 Edit Profile
             </div>
             <router-link :to="{ name: 'Account' }">

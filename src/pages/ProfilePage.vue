@@ -11,17 +11,13 @@
 import PostCard from '../components/PostCard.vue';
 import PostForm from '../components/PostForm.vue';
 import ProfileHeader from '../components/ProfileHeader.vue';
-import PostEditFormModal from '../components/PostEditFormModal.vue';
-import ProfileFormModal from '../components/ProfileFormModal.vue';
-import { Modal } from 'bootstrap';
+import ProfileSideBar from '../components/ProfileSideBar.vue';
 
   const theme = ref(loadState('theme') || 'light')
   const activeProfile = computed(() => AppState.activeProfile)
   const route = useRoute()
   const posts = computed(() => AppState.activeProfilePosts)
   const paids = computed(() => AppState.paids)
-  const account = computed(()=>AppState.account)
-
   
   async function findProfile() {
     try {
@@ -72,7 +68,7 @@ import { Modal } from 'bootstrap';
 
     <section class="row">
       <div class="col-2 flex-column justify-content-center p-2">
-        <ProfileCard />
+        <ProfileSideBar/>
         <button class="btn text-success fs-1" @click="toggleTheme"
           :title="`Enable ${theme == 'light' ? 'dark' : 'light'} theme.`">
           <i class="mdi" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i>
@@ -110,8 +106,7 @@ import { Modal } from 'bootstrap';
   <div v-else class="col-8">
     <p class="text-emphasis">Search above to see content or access the homepage via the logo in the corner.</p>
   </div>
-  <ProfileFormModal/>
-  <PostEditFormModal/>
+  <FormModal/>
 </template>
 
 <style lang="scss" scoped>

@@ -41,6 +41,10 @@ function setFormModal(formType){
     profileService.setFormModal(formType)
   }
 
+// function resetFormType(){
+//     profileService.resetFormType()
+// }
+
 </script>
 
 
@@ -59,7 +63,7 @@ function setFormModal(formType){
           <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" aria-labelledby="postDropdown">
               <div class="list-group">
                   <div class="list-group-item dropdown-item list-group-item-action selectable" data-bs-toggle="modal"
-                      data-bs-target="#formModal" @click="setFormModal(`<PostForm/>`)"><i class="mdi mdi-pen"></i> Edit Post
+                      data-bs-target="#formModal" @click="setFormModal('post')"><i class="mdi mdi-pen"></i> Edit Post
                   </div>
                   <div class="list-group-item dropdown-item list-group-item-action" @click="trashPost(post.id)"><i
                           class="mdi mdi-trash-can"></i> Delete Post

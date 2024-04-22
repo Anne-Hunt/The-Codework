@@ -16,7 +16,7 @@ async function postPost(){
         await postService.postPosts(postData.value) 
         postData.value = {
     body: '',
-    imgUrl: '',
+    imgUrl: ''
 }
     } catch (error) {
         logger.log('unable to post post', error)

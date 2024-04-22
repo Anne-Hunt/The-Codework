@@ -6,10 +6,11 @@ import Pop from '../utils/Pop.js';
 import { postService } from '../services/PostService.js';
 
 defineProps({post: Post}) 
+
 const postData = ref({
     body: '',
     imgUrl: '',
-    id: ''
+    id: 
 })
 
 async function updatePost(id){
@@ -27,7 +28,7 @@ async function updatePost(id){
 
 <template>
     <div>
-        <form @submit.prevent="updatePost(post.id)">
+        <form @submit.prevent="updatePost()">
             <label class="form-label" for="postBody">Update Your Post</label>
             <input v-model="postData.body" type="text-area" name="body" class="form-control text-secondary"
                 id="postBody" maxlength="5000" required>

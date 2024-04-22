@@ -4,6 +4,10 @@ import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 
 class ProfileService {
+    resetFormType() {
+        AppState.formType = ''
+    }
+
     setFormModal(type) {
         AppState.formType = ``
         AppState.formType = type

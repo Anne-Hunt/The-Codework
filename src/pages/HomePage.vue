@@ -6,12 +6,11 @@ import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
 import { loadState, saveState } from '../utils/Store.js';
-import ProfileCard from '../components/ProfileCard.vue';
+import ProfileSideBar from '../components/ProfileSideBar.vue';
 import PostCard from '../components/PostCard.vue';
 import PaidCard from '../components/PaidCard.vue';
 import PostForm from '../components/PostForm.vue';
 import ProfileResultCard from '../components/ProfileResultCard.vue';
-import { Modal } from 'bootstrap';
 import FormModal from '../components/FormModal.vue';
 
 const posts = computed(()=> AppState.posts)
@@ -19,7 +18,6 @@ const theme = ref(loadState('theme') || 'light')
 const paids = computed(()=> AppState.paids)
 const profileResults = computed(()=> AppState.profileResults)
 const postResults = computed(()=> AppState.postResults)
-const account = computed(()=>AppState.account)
 
 async function getPosts(){
   try {
@@ -80,7 +78,7 @@ function toggleTheme() {
 <template>
   <section class="row">
     <div class="col-2 text-center p-2">
-      <ProfileCard />
+      <ProfileSideBar />
       <button class="btn text-light" @click="toggleTheme"
         :title="`Enable ${theme == 'light' ? 'dark' : 'light'} theme.`">
         <i class="mdi text-success fs-1" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i>

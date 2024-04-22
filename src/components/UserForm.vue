@@ -4,6 +4,7 @@ import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { accountService } from '../services/AccountService.js';
 import { Modal } from 'bootstrap';
+import { profileService } from '../services/ProfileService.js';
 // import { AppState } from '../AppState.js';
 // import { profileService } from '../services/ProfileService.js';
 
@@ -29,13 +30,17 @@ async function updateProfile(updateData){
     try {
         await accountService.updateProfile(updateData)
         // await profileService.updateProfile(AppState.account.id, updateData.value)
-        Modal.getOrCreateInstance('#profileFormModal').hide()
+        // Modal.getOrCreateInstance('#profileFormModal').hide()
         Pop.toast('Successfully updated!', 'success')
     } catch (error) {
         logger.log('updating profile failed', error)
         Pop.toast('Unable to update profile', 'error')
     }
 }
+
+// function resetFormType(){
+//     profileService.resetFormType()
+// }
 </script>
 
 

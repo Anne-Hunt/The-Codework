@@ -9,7 +9,7 @@ export class Post {
         this.creator = data.creator
         this.createdAt = new Date(data.createdAt)
         this.updatedAt = new Date(data.updatedAt)
-        this.id = data._id
+        this.id = data._id ? data._id : ''
     }
 
     get LikeCount() {

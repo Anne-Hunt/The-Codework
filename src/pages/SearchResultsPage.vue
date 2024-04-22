@@ -6,7 +6,7 @@ import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
 import { loadState, saveState } from '../utils/Store.js';
-import ProfileCard from '../components/ProfileCard.vue';
+import ProfileCard from '../components/ProfileSideBar.vue/index.js';
 import PostCard from '../components/PostCard.vue';
 import PaidCard from '../components/PaidCard.vue';
 import PostForm from '../components/PostForm.vue';

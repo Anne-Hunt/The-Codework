@@ -18,6 +18,7 @@ class AccountService {
     logger.log('updating profile', response.data)
     const account = new Account(response)
     AppState.account = account
+    AppState.formType = ''
     logger.log('end update', AppState.account)
   }
 }

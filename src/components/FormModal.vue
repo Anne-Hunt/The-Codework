@@ -5,9 +5,14 @@ import { Profile } from '../models/Profile.js';
 import PostEditForm from './PostEditForm.vue';
 import UserForm from './UserForm.vue';
 import { AppState } from '../AppState.js';
+import { profileService } from '../services/ProfileService.js';
 
 // const formModal = document.getElementById('formModal')
 const formType = computed(()=> AppState.formType)
+
+function resetFormType(){
+    profileService.resetFormType()
+}
 
 defineProps({
   post: Post, profile: Profile
@@ -45,11 +50,14 @@ defineProps({
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="resetFormType"></button>
       </div>
       <div class="modal-body">
-        <div>
-          {{ formType}}
+        <div v-if="AppState.formType == 'post'">
+          <PostEditForm/>
+        </div>
+        <div v-else-if="AppState.formType == 'user'">
+          <UserForm/>
         </div>
       </div>
       <div class="modal-footer">
