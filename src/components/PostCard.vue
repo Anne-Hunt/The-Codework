@@ -66,9 +66,9 @@ async function openModal(postId){
                         
                     </div>
                 </div>
-                <div class="col-1">
+                <div class="col-2">
                     <div v-if="post.creator.id == account?.id" class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></button>
                         <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" aria-labelledby="postDropdown">
                             <div class="list-group">

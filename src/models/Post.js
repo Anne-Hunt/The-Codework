@@ -1,4 +1,4 @@
-import { DateTime } from "luxon"
+import { DateTime, Interval } from "luxon"
 
 export class Post {
     constructor(data) {
@@ -23,9 +23,11 @@ export class Post {
         return `${dateCreated}`
     }
 
-    get Interval() {
-
-        return ``
+    get IntervalFix() {
+        const start = this.createdAt
+        const duration = DateTime.now()
+        const interval = Interval.after(start, duration)
+        return `${interval}`
     }
 }
 
