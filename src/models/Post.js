@@ -7,8 +7,8 @@ export class Post {
         this.creatorId = data.creatorId
         this.likeIds = data.likeIds
         this.creator = data.creator
-        this.createdAt = new Date(data.createdAt)
-        this.updatedAt = new Date(data.updatedAt)
+        this.createdAt = new Date(data.createdAt) || new Date()
+        this.updatedAt = new Date(data.updatedAt) || new Date()
         this.id = data._id ? data._id : ''
     }
 

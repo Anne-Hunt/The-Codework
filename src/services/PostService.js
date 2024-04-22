@@ -5,6 +5,11 @@ import { api } from "./AxiosService.js"
 
 
 class PostService {
+    setFormModal(postId) {
+        AppState.formType = ``
+        AppState.formType = postId
+    }
+
     async getActiveProfilePosts(profileId) {
         AppState.activeProfilePosts = []
         const response = await api.get(`api/profiles/${profileId}/posts`)

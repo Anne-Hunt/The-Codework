@@ -1,19 +1,24 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { Post } from '../models/Post.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { postService } from '../services/PostService.js';
+import { Modal } from 'bootstrap';
+import { AppState } from '../AppState.js';
 
 const postData = ref({
     body: '',
     imgUrl: '',
 })
 
+const postId = computed(()=> AppState.formType)
+
 async function postPost(){
     try {
         logger.log('making your post', postData)
         await postService.postPosts(postData.value) 
+        Modal.getOrCreateInstance('#formModal').hide()
         postData.value = {
     body: '',
     imgUrl: ''

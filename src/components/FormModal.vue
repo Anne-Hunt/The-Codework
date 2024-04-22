@@ -53,12 +53,7 @@ defineProps({
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="resetFormType"></button>
       </div>
       <div class="modal-body">
-        <div v-if="AppState.formType == 'post'">
           <PostEditForm/>
-        </div>
-        <div v-else-if="AppState.formType == 'user'">
-          <UserForm/>
-        </div>
       </div>
       <div class="modal-footer">
         <p>Changes cannot be undone!</p>

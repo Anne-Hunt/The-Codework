@@ -1,21 +1,23 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { Post } from '../models/Post.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { postService } from '../services/PostService.js';
+import { AppState } from '../AppState.js';
 
 defineProps({post: Post}) 
 
 const postData = ref({
     body: '',
     imgUrl: '',
-    id: 
+    id:''
 })
 
-async function updatePost(id){
+const postId = computed(()=> AppState.formType)
+
+async function updatePost(postId){
     try {
-        const postId = id
         logger.log('making your post', postData, postId)
         await postService.updatePost(postId, postData.value)
     } catch (error) {
@@ -28,7 +30,7 @@ async function updatePost(id){
 
 <template>
     <div>
-        <form @submit.prevent="updatePost()">
+        <form @submit.prevent="updatePost(postId)">
             <label class="form-label" for="postBody">Update Your Post</label>
             <input v-model="postData.body" type="text-area" name="body" class="form-control text-secondary"
                 id="postBody" maxlength="5000" required>

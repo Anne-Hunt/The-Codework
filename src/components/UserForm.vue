@@ -3,10 +3,9 @@ import { computed, onMounted, ref } from 'vue';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { accountService } from '../services/AccountService.js';
-import { Modal } from 'bootstrap';
-import { profileService } from '../services/ProfileService.js';
-// import { AppState } from '../AppState.js';
-// import { profileService } from '../services/ProfileService.js';
+import { AppState } from '../AppState.js';
+
+const account = computed(()=> AppState.account)
 
 const updateData  = ref({
     email: '',
@@ -19,7 +18,6 @@ const updateData  = ref({
     resume: '',
     class: '',
     graduated: Boolean,
-    id: ''
 })
 
 // onMounted(()=>
@@ -30,7 +28,6 @@ async function updateProfile(updateData){
     try {
         await accountService.updateProfile(updateData)
         // await profileService.updateProfile(AppState.account.id, updateData.value)
-        // Modal.getOrCreateInstance('#profileFormModal').hide()
         Pop.toast('Successfully updated!', 'success')
     } catch (error) {
         logger.log('updating profile failed', error)
@@ -46,7 +43,7 @@ async function updateProfile(updateData){
 
 <template>
 <div>
-    <form @submit.prevent="updateProfile" class="text-light">
+    <form @submit.prevent="updateProfile(account.id)" class="text-light">
         <div class="d-flex">
             <div class="form-floating mb-3 w-50 p-1">
                 <input v-model="updateData.email" type="email" name="email" class="form-control" id="updateEmail"
