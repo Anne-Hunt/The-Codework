@@ -7,6 +7,7 @@ import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
 import { Modal } from 'bootstrap';
+import { DateTime } from "luxon"
 
 const account = computed(()=>AppState.account)
 
@@ -64,7 +65,7 @@ async function openModal(postId){
                     </div>
                 </div>
                 <div class="col">
-                    <p class="name">{{ post.createdAt }}</p>
+                    <p class="name">{{ post.DateFix }}</p>
                     <div class="col">
                     </div>
                 </div>
@@ -87,9 +88,15 @@ async function openModal(postId){
             </div>
         </div>
         <div class="row">
-            <img class="postImg" :src="post.imgUrl" alt="Image!">
-            <p>{{ post.body }}</p>
-            <span><i class="mdi mdi-heart" @click="likePost(post.id)"></i> {{ post.LikeCount }}</span>
+            <div class="col">
+                <img class="postImg" :src="post.imgUrl" alt="Image!">
+            </div>
+            <div class="col">
+                <p>{{ post.body }}</p>
+            </div>
+            <div>
+                <span><i class="mdi mdi-heart" @click="likePost(post.id)"></i> {{ post.LikeCount }}</span>
+            </div>
         </div>
     </div>
 </div>
@@ -107,7 +114,7 @@ async function openModal(postId){
 }
 
 .postImg{
-    max-height: 100px;
+    max-height: 200px;
     object-fit: scale-down;
     object-position: center;
 }
