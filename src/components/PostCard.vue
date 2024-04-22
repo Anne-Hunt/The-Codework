@@ -37,9 +37,14 @@ async function likePost(postId){
     }
 }
 
-function setFormModal(postId){
-    postService.setFormModal(postId)
-  }
+async function openModal(postId){
+    try {
+        Modal.getOrCreateInstance('#formModal').show(postId)
+    } catch (error) {
+        Pop.toast('Unable to open post form', 'error')
+        logger.log('bad post modal', error)
+    }
+}
 
 // function resetFormType(){
 //     profileService.resetFormType()
@@ -62,8 +67,8 @@ function setFormModal(postId){
               aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></button>
           <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" aria-labelledby="postDropdown">
               <div class="list-group">
-                  <div class="list-group-item dropdown-item list-group-item-action selectable" data-bs-toggle="modal"
-                      data-bs-target="#formModal" @click="setFormModal(post.id)"><i class="mdi mdi-pen"></i> Edit Post
+                  <div class="list-group-item dropdown-item list-group-item-action selectable"
+                      data-bs-target="#formModal" @click="openModal(post.id)"><i class="mdi mdi-pen"></i> Edit Post
                   </div>
                   <div class="list-group-item dropdown-item list-group-item-action" @click="trashPost(post.id)"><i
                           class="mdi mdi-trash-can"></i> Delete Post

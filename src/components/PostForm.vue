@@ -12,13 +12,12 @@ const postData = ref({
     imgUrl: '',
 })
 
-const postId = computed(()=> AppState.formType)
+// const postId = computed(()=> AppState.formType)
 
 async function postPost(){
     try {
         logger.log('making your post', postData)
         await postService.postPosts(postData.value) 
-        Modal.getOrCreateInstance('#formModal').hide()
         postData.value = {
     body: '',
     imgUrl: ''

@@ -5,13 +5,13 @@ import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { postService } from '../services/PostService.js';
 import { AppState } from '../AppState.js';
+import { Modal } from 'bootstrap';
 
 defineProps({post: Post}) 
 
 const postData = ref({
     body: '',
     imgUrl: '',
-    id:''
 })
 
 const postId = computed(()=> AppState.formType)
@@ -20,6 +20,7 @@ async function updatePost(postId){
     try {
         logger.log('making your post', postData, postId)
         await postService.updatePost(postId, postData.value)
+        Modal.getOrCreateInstance('#formModal').hide()
     } catch (error) {
         logger.log('unable to update post', error)
         Pop.toast('Unable to update post right now', error)

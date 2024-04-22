@@ -53,10 +53,7 @@ class PostService {
     async updatePost(postData, postId) {
         const response = await api.put(`api/posts/${postId}`, postData)
         logger.log('updating data in service for post', response.data)
-        AppState.formType = ''
-        // const post = new Post(response.data)
-        // = AppState.posts.find(post => post.id == postId)
-
+        this.getPosts()
     }
 
     async likePost(postId) {
