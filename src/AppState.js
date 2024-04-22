@@ -22,5 +22,6 @@ export const AppState = reactive({
   totalPages: null,
   searchTerms: null,
   profileResults: [],
-  postResults: []
+  postResults: [],
+  formType: ``
 })

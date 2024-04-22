@@ -11,8 +11,8 @@ import PostCard from '../components/PostCard.vue';
 import PaidCard from '../components/PaidCard.vue';
 import PostForm from '../components/PostForm.vue';
 import ProfileResultCard from '../components/ProfileResultCard.vue';
-import PostEditFormModal from '../components/PostEditFormModal.vue';
-import ProfileFormModal from '../components/ProfileFormModal.vue';
+import { Modal } from 'bootstrap';
+import FormModal from '../components/FormModal.vue';
 
 const posts = computed(()=> AppState.posts)
 const theme = ref(loadState('theme') || 'light')
@@ -121,8 +121,7 @@ function toggleTheme() {
       </div>
     </div>
   </section>
-  <ProfileFormModal />
-  <PostEditFormModal />
+  <FormModal />
 </template>
 
 <style scoped lang="scss">

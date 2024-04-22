@@ -42,7 +42,7 @@ class PostService {
         const response = await api.post('api/posts', postData)
         logger.log('adding posts in service', response.data)
         const post = new Post(postData)
-        AppState.posts.push(post)
+        AppState.posts.unshift(post)
     }
 
     async updatePost(postData, postId) {

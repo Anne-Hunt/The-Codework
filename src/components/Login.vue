@@ -8,6 +8,7 @@
   import {
     AuthService
   } from '../services/AuthService'
+import { profileService } from '../services/ProfileService.js';
 
   const user = computed(() => AppState.user)
   const account = computed(() => AppState.account)
@@ -18,6 +19,10 @@
     AuthService.logout({
       returnTo: window.location.origin
     })
+  }
+
+  function setFormModal(formType){
+    profileService.setFormModal(formType)
   }
 </script>
 
@@ -37,7 +42,7 @@
         </div>
         <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" aria-labelledby="authDropdown">
           <div class="list-group">
-            <div class="list-group-item dropdown-item list-group-item-action text-danger selectable" data-bs-toggle="modal" data-bs-target="#profileFormModal">
+            <div class="list-group-item dropdown-item list-group-item-action selectable" data-bs-toggle="modal" data-bs-target="#formModal" @click="setFormModal(`<UserForm/>`)">
                 Edit Profile
             </div>
             <router-link :to="{ name: 'Account' }">

@@ -4,6 +4,11 @@ import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 
 class ProfileService {
+    setFormModal(type) {
+        AppState.formType = ``
+        AppState.formType = type
+    }
+
     async findUserProfile() {
         const userId = AppState.account.id
         const response = await api.get(`api/profile/${userId}`)

@@ -1,14 +1,19 @@
 <script setup>
+import { computed } from 'vue';
 import { Account } from '../models/Account.js';
 import { Post } from '../models/Post.js';
 import { Profile } from '../models/Profile.js';
 import { postService } from '../services/PostService.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
+import { AppState } from '../AppState.js';
+import { Modal } from 'bootstrap';
+import { profileService } from '../services/ProfileService.js';
 
+const account = computed(()=>AppState.account)
 
 defineProps (
-    {post: Post, profile: Profile, account: Account}
+    {post: Post, profile: Profile}
 )
 
 async function trashPost(postId){
@@ -32,6 +37,10 @@ async function likePost(postId){
     }
 }
 
+function setFormModal(formType){
+    profileService.setFormModal(formType)
+  }
+
 </script>
 
 
@@ -44,21 +53,21 @@ async function likePost(postId){
                         <img :src="post.creator.picture" :alt="post.creator.picture" class="profilePic inline-block">
                     </RouterLink>
                 </div>
-<!-- <v-if="post.creator.id == account?.id" > -->
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <i class="mdi mdi-dots-horizontal"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editPostForm"><i
-                                    class="mdi mdi-pen"></i> Edit Post</a></li>
-                        <li><a class="dropdown-item" href="#" @click="trashPost(post.id)"><i
-                                    class="mdi mdi-trash-can"></i>
-                                Delete Post</a></li>
-                    </ul>
-                </div>
-            </div>
+      <div v-if="post.creator.id == account?.id" class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></button>
+          <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" aria-labelledby="postDropdown">
+              <div class="list-group">
+                  <div class="list-group-item dropdown-item list-group-item-action selectable" data-bs-toggle="modal"
+                      data-bs-target="#formModal" @click="setFormModal(`<PostForm/>`)"><i class="mdi mdi-pen"></i> Edit Post
+                  </div>
+                  <div class="list-group-item dropdown-item list-group-item-action" @click="trashPost(post.id)"><i
+                          class="mdi mdi-trash-can"></i> Delete Post
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
             <div class="inline">
                 <p class="inline name">{{ post.creator.name }}</p>
             </div>
