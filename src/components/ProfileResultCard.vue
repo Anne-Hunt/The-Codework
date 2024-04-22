@@ -10,15 +10,18 @@ defineProps (
 <template>
 <div>
     <div class="bg-light text-dark shadow post p-3">
-        <div class="inline w-25">
-            <RouterLink :to="{name: 'Profile', params: {profileId: profile.id}}" class="selectable">
-                <img :src="profile.picture" :alt="profile.name" class="profilePic inline-block">
-            </RouterLink>
-        </div>
-        <div>
-            <a :href="profile.linkedin"><i class="mdi mdi-linkedin"></i></a>
-            <a :href="profile.github"><i class="mdi mdi-github"></i></a>
-            <a :href="profile.resume"><i class="mdi mdi-file-account"></i></a>
+        <div class="row justify-content-center">
+            <div class="col">
+                <RouterLink :to="{name: 'Profile', params: {profileId: profile.id}}" class="selectable">
+                    <img :src="profile.picture" :alt="profile.name" class="profilePic inline-block">
+                </RouterLink>
+            </div>
+            <div class="col">
+                <a :href="profile.linkedin"><i class="mdi mdi-linkedin fs-2"></i></a>
+                <a :href="profile.github"><i class="mdi mdi-github fs-2"></i></a>
+                <a :href="profile.resume"><i class="mdi mdi-file-account fs-2"></i></a>
+                <h2>{{ profile.name }}, class of {{ profile.class }} <span v-if="profile.graduated != true"><i class="mdi mdi-pencil-circle fs-2"></i></span><span v-else><i class="mdi mdi-account-school fs-2"></i></span></h2>
+            </div>
         </div>
     </div>
 </div>
@@ -32,12 +35,12 @@ defineProps (
 }
 
 .post{
-    height: 40dvh;
+    max-height: 40dvh;
 }
 
 .profilePic{
-    height: 50px;
-    width: 50px;
+    height: 150px;
+    width: 150px;
     object-fit: cover;
     object-position: center;
 }
