@@ -5,6 +5,14 @@ import { api } from "./AxiosService.js"
 
 
 class PostService {
+    setActivePost(postId) {
+        AppState.activePost = null
+        const response = AppState.posts.find(post => post.id == postId)
+        logger.log('post found', response.data)
+        const result = new Post(response)
+        AppState.activePost = result
+    }
+
     setFormModal(postId) {
         AppState.formType = ``
         AppState.formType = postId

@@ -8,7 +8,6 @@ import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
 import { Modal } from 'bootstrap';
-import { profileService } from '../services/ProfileService.js';
 
 const account = computed(()=>AppState.account)
 
@@ -39,6 +38,7 @@ async function likePost(postId){
 
 async function openModal(postId){
     try {
+        await postService.setActivePost(postId)
         Modal.getOrCreateInstance('#formModal').show(postId)
     } catch (error) {
         Pop.toast('Unable to open post form', 'error')
