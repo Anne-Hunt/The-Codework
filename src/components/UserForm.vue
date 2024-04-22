@@ -7,6 +7,8 @@ import { AppState } from '../AppState.js';
 
 const account = computed(()=> AppState.account)
 
+const accountId = AppState.account.id
+
 const updateData  = ref({
     email: '',
     name: '',
@@ -18,6 +20,7 @@ const updateData  = ref({
     resume: '',
     class: '',
     graduated: Boolean,
+    id: accountId
 })
 
 async function updateProfile(updateData){

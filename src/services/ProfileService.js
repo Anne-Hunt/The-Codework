@@ -27,12 +27,6 @@ class ProfileService {
         logger.log('found profile', response.data)
         AppState.activeProfile = new Profile(response.data)
     }
-
-    async updateProfile(profileId, updateData) {
-        const response = await api.put(`api/profiles/${profileId}`, updateData)
-        logger.log('sending to profile server', updateData, profileId, response.data)
-    }
-
 }
 
 export const profileService = new ProfileService()

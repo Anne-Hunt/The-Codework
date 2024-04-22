@@ -1,6 +1,6 @@
 export class Account {
   constructor(data) {
-    this.id = data.id
+    this.id = data.id || data._id
     this.subs = data.subs
     this.email = data.email
     this.name = data.name

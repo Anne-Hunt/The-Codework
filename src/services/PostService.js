@@ -13,11 +13,6 @@ class PostService {
         AppState.activePost = result
     }
 
-    setFormModal(postId) {
-        AppState.formType = ``
-        AppState.formType = postId
-    }
-
     async getActiveProfilePosts(profileId) {
         AppState.activeProfilePosts = []
         const response = await api.get(`api/profiles/${profileId}/posts`)
@@ -55,15 +50,20 @@ class PostService {
     }
 
     async updatePost(postData) {
+        const post = new Post(postData)
         const postId = AppState.activePost.id
-        const response = await api.put(`api/posts/${postId}`, postData)
+        const response = await api.put(`api/posts/${postId}`, post)
         logger.log('updating data in service for post', response.data)
-
+        const editPost = AppState.posts.find(post => post.id == postId)
+        editPost.body = post.body
+        editPost.imgUrl = post.imgUrl
     }
 
     async likePost(postId) {
         const response = await api.post(`/api/posts/${postId}/like`)
         logger.log('altering state of like on post', response.data)
+        const post = AppState.posts.find(post => post.id == postId)
+        post.likeIds = response.data.likeIds
     }
 
     async trashPost(postId) {

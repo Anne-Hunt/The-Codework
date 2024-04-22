@@ -14,10 +14,21 @@ class AccountService {
   }
 
   async updateProfile(profileData) {
-    const response = await api.put('account/', profileData)
+    const profile = new Account(profileData)
+    const account = AppState.account
+    account.bio = profile.bio
+    account.class = profile.class
+    account.coverImg = profile.coverImg
+    account.email = profile.email
+    account.github = profile.github
+    account.graduated = profile.graduated
+    account.linkedin = profile.linkedin
+    account.name = profile.name
+    account.picture = profile.picture
+    account.resume = profile.resume
+    account.subs = profile.subs
+    const response = await api.put('account/', profile)
     logger.log('updating profile', response.data)
-    const account = new Account(response)
-    AppState.account = account
     logger.log('end update', AppState.account)
   }
 }

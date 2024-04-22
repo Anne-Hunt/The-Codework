@@ -49,41 +49,50 @@ async function openModal(postId){
 
 
 <template>
-    <div>
+    <div class="p-2">
+
         <div class="bg-light text-dark shadow post p-3">
-            <div class="inline w-25">
-                <div>
+            <div class="row justify-content-between">
+                <div class="col">
                     <RouterLink :to="{name: 'Profile', params: {profileId: post.creator.id}}" class="selectable">
                         <img :src="post.creator.picture" :alt="post.creator.picture" class="profilePic inline-block">
                     </RouterLink>
+                    <span class="name">{{ post.creator.name }}</span>
+                    <div>
+                        <span>{{ post.creator.class }} </span><span v-if="post.creator.graduated != true"><i class="mdi mdi-pencil-circle"></i></span><span v-else><i class="mdi mdi-account-school"></i></span>
+                        <p><a :href="post.creator.linkedin"><i class="mdi mdi-linkedin"></i></a><a :href="post.creator.github"><i class="mdi mdi-github"></i></a><a :href="post.creator.resume"><i class="mdi mdi-file-account"></i></a> </p>
+                    </div>
                 </div>
-      <div v-if="post.creator.id == account?.id" class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-              aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></button>
-          <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" aria-labelledby="postDropdown">
-              <div class="list-group">
-                  <div class="list-group-item dropdown-item list-group-item-action selectable"
-                      data-bs-target="#formModal" @click="openModal(post.id)"><i class="mdi mdi-pen"></i> Edit Post
-                  </div>
-                  <div class="list-group-item dropdown-item list-group-item-action" @click="trashPost(post.id)"><i
-                          class="mdi mdi-trash-can"></i> Delete Post
-                  </div>
-              </div>
-          </div>
-      </div>
-      </div>
-            <div class="inline">
-                <p class="inline name">{{ post.creator.name }}</p>
-            </div>
-            <span>{{ post.createdAt }}</span>
-            <div class="row overflow">
-                <img class="postImg" :src="post.imgUrl" alt="Image!">
-                <p>{{ post.body }}</p>
-                <span><i class="mdi mdi-heart" @click="likePost(post.id)"></i> {{ post.LikeCount }}</span>
-
+                <div class="col">
+                    <p class="name">{{ post.createdAt }}</p>
+                    <div class="col">
+                    </div>
+                </div>
+                <div class="col">
+                    <div v-if="post.creator.id == account?.id" class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></button>
+                        <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" aria-labelledby="postDropdown">
+                            <div class="list-group">
+                                <div class="list-group-item dropdown-item list-group-item-action selectable"
+                                data-bs-target="#formModal" @click="openModal(post.id)"><i class="mdi mdi-pen"></i> Edit
+                                Post
+                            </div>
+                            <div class="list-group-item dropdown-item list-group-item-action" @click="trashPost(post.id)"><i
+                                class="mdi mdi-trash-can"></i> Delete Post
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="row">
+            <img class="postImg" :src="post.imgUrl" alt="Image!">
+            <p>{{ post.body }}</p>
+            <span><i class="mdi mdi-heart" @click="likePost(post.id)"></i> {{ post.LikeCount }}</span>
+        </div>
     </div>
+</div>
 </template>
 
 
@@ -94,12 +103,12 @@ async function openModal(postId){
 }
 
 .post{
-    height: 40dvh;
+    max-height: 50dvh;
 }
 
 .postImg{
     max-height: 100px;
-    object-fit: cover;
+    object-fit: scale-down;
     object-position: center;
 }
 
