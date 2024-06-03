@@ -19,7 +19,7 @@ const updateData  = ref({
     linkedin: '',
     resume: '',
     class: '',
-    graduated: Boolean,
+    graduated: false,
     id: accountId
 })
 

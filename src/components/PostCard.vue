@@ -52,49 +52,54 @@ async function openModal(postId){
 <template>
     <div class="p-2">
 
-        <div class="bg-light text-dark shadow post p-3">
-            <div class="row justify-content-between align-items-center">
+        <div class="bg-light text-dark shadow">
+            <div class="row justify-content-between align-items-center p-2">
                 <div class="col">
                     <RouterLink :to="{name: 'Profile', params: {profileId: post.creator.id}}" class="selectable">
-                        <img :src="post.creator.picture" :alt="post.creator.picture" class="profilePic inline-block pe-1">
+                        <img :src="post.creator.picture" :alt="post.creator.picture" class="profilePic inline-block rounded-circle border border-primary pe-1">
                     </RouterLink>
-                    <span class="name">{{ post.creator.name }}</span>
+                    <span class="name p-1">{{ post.creator.name }}</span>
                 </div>
                 <div class="col">
-                    <div>
+                    <div class="text-end">
                         <span>{{ post.creator.class }} </span><span v-if="post.creator.graduated != true"><i class="mdi mdi-pencil-circle fs-2"></i><a :href="post.creator.linkedin"><i class="mdi mdi-linkedin fs-2"></i></a><a :href="post.creator.github"><i class="mdi mdi-github fs-2"></i></a><a :href="post.creator.resume"><i class="mdi mdi-file-account fs-2"></i></a></span><span v-else><i class="mdi mdi-account-school fs-2"></i><a :href="post.creator.linkedin"><i class="mdi mdi-linkedin fs-2"></i></a><a :href="post.creator.github"><i class="mdi mdi-github fs-2"></i></a><a :href="post.creator.resume"><i class="mdi mdi-file-account fs-2"></i></a></span>
                         
                     </div>
                 </div>
-                <div class="col-2">
-                    <div v-if="post.creator.id == account?.id" class="dropdown">
-                        <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></button>
-                        <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" aria-labelledby="postDropdown">
-                            <div class="list-group">
-                                <div class="list-group-item dropdown-item list-group-item-action selectable"
-                                data-bs-target="#formModal" @click="openModal(post.id)"><i class="mdi mdi-pen"></i> Edit
-                                Post
-                            </div>
-                            <div class="list-group-item dropdown-item list-group-item-action" @click="trashPost(post.id)"><i
-                                class="mdi mdi-trash-can"></i> Delete Post
+                <div class="row justify-content-between m-0">
+                    <div class="col-4">
+                        <p><small>{{ post.updatedAt }}</small></p>
+                    </div>
+                    
+                    <div class="col-2 text-end px-0">
+                        <div v-if="post.creator.id == account?.id" class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></button>
+                            <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" aria-labelledby="postDropdown">
+                                <div class="list-group">
+                                    <div class="list-group-item dropdown-item list-group-item-action selectable"
+                                    data-bs-target="#formModal" @click="openModal(post.id)"><i class="mdi mdi-pen"></i> Edit
+                                    Post
+                                </div>
+                                <div class="list-group-item dropdown-item list-group-item-action" @click="trashPost(post.id)"><i
+                                    class="mdi mdi-trash-can"></i> Delete Post
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-                        <p class="name">{{ post.DateFix }}</p>
+        <div class="row p-0 m-0">
                     
-            <div class="col">
-                <img class="postImg" :src="post.imgUrl" alt="Image!">
-            </div>
-            <div class="col postBody p-1">
+            <img class="img-fluid postImg p-0 m-0" :src="post.imgUrl" alt="Image!">
+        </div>
+        <div class="row p-1">
                 <p>{{ post.body }}</p>
-            </div>
             <div>
-                <span><i class="mdi mdi-heart fs-2" @click="likePost(post.id)"></i> {{ post.LikeCount }}</span>
+                <div class="row text-end">
+                    <span><i class="mdi mdi-heart fs-2 text-danger" @click="likePost(post.id)"></i> {{ post.LikeCount }}</span>
+                </div>
             </div>
         </div>
     </div>
@@ -111,12 +116,12 @@ async function openModal(postId){
 .post{
     max-height: 60dvh;
     display: block;
-    overflow: scroll;
 }
 
 .postImg{
-    max-height: 200px;
-    object-fit: scale-down;
+    max-height: 100dvh;
+    width: 100%;
+    object-fit: cover;
     object-position: center;
 }
 

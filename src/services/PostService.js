@@ -5,6 +5,9 @@ import { api } from "./AxiosService.js"
 
 
 class PostService {
+    clearingSearch() {
+        AppState.searchTerms = ''
+    }
     setActivePost(postId) {
         AppState.activePost = null
         const response = AppState.posts.find(post => post.id == postId)

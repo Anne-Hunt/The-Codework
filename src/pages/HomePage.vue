@@ -79,7 +79,7 @@ function toggleTheme() {
   <section class="row">
     <div class="col-2 text-center p-2">
       <ProfileSideBar />
-      <button class="btn text-light" @click="toggleTheme"
+      <button class="btn text-light fontfix" @click="toggleTheme"
         :title="`Enable ${theme == 'light' ? 'dark' : 'light'} theme.`">
         <i class="mdi text-success fs-1" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i>
       </button>
@@ -141,6 +141,10 @@ function toggleTheme() {
       object-position: center;
     }
   }
+}
+
+.fontfix{
+  text-shadow: 1px 1px 2px black;
 }
 
 .hide{

@@ -27,7 +27,8 @@ class AccountService {
     account.picture = profile.picture
     account.resume = profile.resume
     account.subs = profile.subs
-    const response = await api.put('account/', profile)
+    profile.id = account.id
+    const response = await api.put('account/', account)
     logger.log('updating profile', response.data)
     logger.log('end update', AppState.account)
   }

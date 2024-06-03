@@ -33,7 +33,7 @@
         <div type="button" class="border-0 selectable no-select" data-bs-toggle="dropdown"
           aria-expanded="false">
           <div v-if="account?.picture || user?.picture" class="d-flex justify-content-center">
-            <img :src="account?.picture || user?.picture" alt="account photo" height="70" class="rounded-pill shadow" />
+            <img :src="account?.picture || user?.picture" alt="account photo" height="70" width="70" class="rounded-circle border border-primary shadow" />
           </div>
         </div>
         <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" aria-labelledby="authDropdown">
@@ -54,4 +54,8 @@
   </span>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.fontfix{
+  text-shadow: 1px 1px 2px black;
+}
+</style>

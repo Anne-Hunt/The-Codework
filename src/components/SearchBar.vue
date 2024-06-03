@@ -26,6 +26,7 @@ async function search(){
 async function clearingSearch(){
     try {
         await postService.clearingSearch()
+        searchQuery.value = ''
     } catch (error) {
         logger.log('unable to clear search', error)
         Pop.toast('Unable to clear search', 'error')
@@ -39,7 +40,7 @@ async function clearingSearch(){
     <section class="row">
         <div class="col-1">
             <RouterLink :to="'/'">
-                <i class="mdi mdi-cog-outline text-success fs-1 p-2"></i>
+                <i class="mdi mdi-cog-outline text-success fs-1 p-2 fontfix"></i>
             </RouterLink>
         </div>
             <div class="col-11 p-2">
@@ -59,5 +60,9 @@ async function clearingSearch(){
 <style lang="scss" scoped>
 .clicky{
     cursor: pointer;
+}
+
+.fontfix{
+  text-shadow: 1px 1px 2px black;
 }
 </style>

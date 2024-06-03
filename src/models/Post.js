@@ -8,7 +8,7 @@ export class Post {
         this.likeIds = data.likeIds
         this.creator = data.creator
         this.createdAt = new Date(data.createdAt) || new Date()
-        this.updatedAt = new Date(data.updatedAt) || new Date()
+        this.updatedAt = new Date(data.updatedAt).toLocaleDateString() || new Date()
         this.id = data.id
     }
 
